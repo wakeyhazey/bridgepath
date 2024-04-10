@@ -47,7 +47,10 @@ class BridgePathApp extends StatelessWidget {
       ],
       child: MaterialApp(
         title: 'BridgePath',
-        theme: ThemeData(primarySwatch: Colors.blue),
+        theme: ThemeData(
+            primarySwatch: Colors.green,
+            appBarTheme: AppBarTheme(
+                backgroundColor: Colors.white, foregroundColor: Colors.black)),
         home: const AccessPage(),
       ),
     );

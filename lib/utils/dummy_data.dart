@@ -12,7 +12,7 @@ List<Map<String, dynamic>> dummyNursingHomes = [
     "accessibility_features": ["Wheelchair Accessible", "Elevator"],
     "rating": 4.5,
     "image":
-        "https://veterans.ny.gov/sites/g/files/oee1326/files/styles/wide_lead/public/media/2023/01/dvs-hero-new-york-state-veterans-nursing-homes-1.png?h=b5f6a62e&itok=OWF3b7jg"
+        "https://marvel-b1-cdn.bc0a.com/f00000000290269/www.riversideonline.com/-/media/patients-and-visitors/healthy-you/skilled-nursing-where-to-get-care.jpg"
   },
   {
     "name": "Maplewood Nursing Residence",
@@ -27,7 +27,7 @@ List<Map<String, dynamic>> dummyNursingHomes = [
     "accessibility_features": ["Ramp Access", "Handrails"],
     "rating": 4.8,
     "image":
-        "https://veterans.ny.gov/sites/g/files/oee1326/files/styles/wide_lead/public/media/2023/01/dvs-hero-new-york-state-veterans-nursing-homes-1.png?h=b5f6a62e&itok=OWF3b7jg"
+        "https://www.caitlin-morgan.com/wp-content/uploads/2020/03/Employee-Rights.jpg"
   },
   {
     "name": "Pinecrest Senior Living",
@@ -42,7 +42,7 @@ List<Map<String, dynamic>> dummyNursingHomes = [
     "accessibility_features": ["Accessible Parking", "Wide Doorways"],
     "rating": 4.2,
     "image":
-        "https://veterans.ny.gov/sites/g/files/oee1326/files/styles/wide_lead/public/media/2023/01/dvs-hero-new-york-state-veterans-nursing-homes-1.png?h=b5f6a62e&itok=OWF3b7jg"
+        "https://www.gannett-cdn.com/presto/2022/03/09/USAT/da685ff1-d9ba-4a14-b170-4209d2330c46-9be9bbad-02e5-4e1b-877d-d0953353b9ec-GettyImages-12890179722.png"
   },
   {
     "name": "Golden Acres Retirement Community",
@@ -56,8 +56,7 @@ List<Map<String, dynamic>> dummyNursingHomes = [
     "address": "101 Pine St, Anyborough, USA",
     "accessibility_features": ["Accessible Gardens", "Fitness Center"],
     "rating": 4.6,
-    "image":
-        "https://veterans.ny.gov/sites/g/files/oee1326/files/styles/wide_lead/public/media/2023/01/dvs-hero-new-york-state-veterans-nursing-homes-1.png?h=b5f6a62e&itok=OWF3b7jg"
+    "image": "https://s7d2.scene7.com/is/image/TWCNews/nursing_home_jpg-1-1"
   },
   {
     "name": "Harborview Assisted Living",
@@ -75,7 +74,7 @@ List<Map<String, dynamic>> dummyNursingHomes = [
     ],
     "rating": 4.4,
     "image":
-        "https://veterans.ny.gov/sites/g/files/oee1326/files/styles/wide_lead/public/media/2023/01/dvs-hero-new-york-state-veterans-nursing-homes-1.png?h=b5f6a62e&itok=OWF3b7jg"
+        "https://baptistretirement.org/wp-content/uploads/2023/10/At-What-Age-Do-Most-People-Enter-Assisted-Living-1.jpg"
   },
   {
     "name": "Oakridge Senior Apartments",

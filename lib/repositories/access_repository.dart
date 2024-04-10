@@ -72,7 +72,7 @@ class AccessRepository {
     }
   }
 
-  logOut() async {
-    await _authApi.logOut();
+  logOut(BuildContext context) async {
+    await _authApi.logOut(context);
   }
 }

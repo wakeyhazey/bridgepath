@@ -47,8 +47,11 @@ class SearchAppBar extends StatelessWidget {
               },
               onChanged: (value) {
                 context.read<HomePageBloc>().add(SearchListings(
-                    searchString:
-                        context.read<HomePageBloc>().searchTerm.text));
+                    searchString: context
+                        .read<HomePageBloc>()
+                        .searchTerm
+                        .text
+                        .toLowerCase()));
               },
             ),
           ],

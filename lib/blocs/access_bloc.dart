@@ -44,6 +44,10 @@ class AccessBloc extends Bloc<AccessEvents, AccessStates> {
         emit(NotAuthenticated());
       }
     });
+
+    on<LogOut>((event, emit) {
+      _accessRepository.logOut(event.context);
+    });
   }
 }
 
@@ -87,4 +91,8 @@ class Register extends AccessEvents {
   Register({required this.info});
 }
 
-class LogOut extends AccessEvents {}
+class LogOut extends AccessEvents {
+  final BuildContext context;
+
+  LogOut({required this.context});
+}

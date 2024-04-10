@@ -35,7 +35,19 @@ class AuthApi {
     }
   }
 
-  logOut() async {
-    await _auth.signOut();
+  Future<bool> logOut(BuildContext? context) async {
+    try {
+      await _auth.signOut().then((value) {
+        if (context != null) {
+          Navigator.popUntil(context, ModalRoute.withName('/'));
+        }
+      });
+
+      return true;
+    } catch (e) {
+      debugPrint(e.toString());
+      debugPrint('error in loggin out');
+      return false;
+    }
   }
 }

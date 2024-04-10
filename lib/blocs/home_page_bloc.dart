@@ -1,3 +1,4 @@
+import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:bridgepath/repositories/home_page_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -22,38 +23,64 @@ class HomePageBloc extends Bloc<HomePageEvents, HomePageStates> {
       TextEditingController(text: '0')
     ],
     "medical care level": [],
-    "location": null,
+    "location": TextEditingController(text: '0'),
     "accessibility features": []
   };
-
-  Future<void> toggleToWishList(String nursingHomeId) async {
-    favoritesIds = await _repo.toggleToFavorites(nursingHomeId);
-    // if (navIndex == 0) {
-    //   add(ShowWishListView());
-    // }
-  }
 
   HomePageBloc() : super(HomePageLoading()) {
     on<InitialiazeHomePageData>((event, emit) {
       filteredNursingHomes = listings = _repo.getNursingHomeListings();
 
       emit(ListingsView(
+          favoritehousings: favoritesIds,
           index: 0,
           nursingHomeListings: filteredNursingHomes,
           selectedFilters: selectedFilters));
     });
 
-    on<SearchListings>((event, emit) {});
+    on<SearchListings>((event, emit) {
+      if (event.searchString.isEmpty) {
+        add(ShowListingsView());
+      } else {
+        emit(ListingsView(
+            favoritehousings: favoritesIds,
+            index: 0,
+            nursingHomeListings: filteredNursingHomes
+                .where((housing) =>
+                    housing['name']
+                        .toLowerCase()
+                        .contains(event.searchString) ||
+                    housing['medical_care_level']
+                        .toLowerCase()
+                        .contains(event.searchString) ||
+                    housing['accessibility_features']
+                        .contains(event.searchString) ||
+                    housing['description']
+                        .toLowerCase()
+                        .contains(event.searchString) ||
+                    housing['type'].toLowerCase().contains(event.searchString))
+                .toList(),
+            selectedFilters: selectedFilters));
+      }
+    }, transformer: droppable());
 
     on<ShowListingsView>((event, emit) {
       emit(ListingsView(
+          favoritehousings: favoritesIds,
           index: 0,
           nursingHomeListings: filteredNursingHomes,
           selectedFilters: selectedFilters));
     });
-    on<ShowFavoritesView>((event, emit) {
-      emit(FavoritesView(index: 1));
+
+    on<ShowFavoritesView>((event, emit) async {
+      favoritesIds = await _repo.getFavorites();
+      emit(FavoritesView(
+          index: 1,
+          favoriteHousings: listings
+              .where((housing) => favoritesIds.contains(housing['id']))
+              .toList()));
     });
+
     on<ShowResourceView>((event, emit) {
       emit(ResourceView(index: 2));
     });
@@ -91,7 +118,7 @@ class HomePageBloc extends Bloc<HomePageEvents, HomePageStates> {
         }
         return flag;
       }).toList();
-
+      searchTerm.clear();
       add(ShowListingsView());
     });
 
@@ -109,6 +136,16 @@ class HomePageBloc extends Bloc<HomePageEvents, HomePageStates> {
 
       add(ShowListingsView());
     });
+
+    on<ToggleToWishList>((event, emit) async {
+      favoritesIds = await _repo.toggleToFavorites(event.housingID);
+
+      if (event.inListing) {
+        add(ShowListingsView());
+      } else {
+        add(ShowFavoritesView());
+      }
+    });
   }
 }
 
@@ -122,17 +159,19 @@ class ListingsView extends HomePageStates {
   final int index;
   final List<Map<String, dynamic>> nursingHomeListings;
   final Map<String, dynamic> selectedFilters;
+  final List<String> favoritehousings;
 
   ListingsView(
       {required this.index,
       required this.nursingHomeListings,
-      required this.selectedFilters});
+      required this.selectedFilters,
+      required this.favoritehousings});
 }
 
 class FavoritesView extends HomePageStates {
   final int index;
-
-  FavoritesView({required this.index});
+  final List<Map<String, dynamic>> favoriteHousings;
+  FavoritesView({required this.index, required this.favoriteHousings});
 }
 
 class ResourceView extends HomePageStates {
@@ -169,3 +208,10 @@ class UpdateFilter extends HomePageEvents {
 class ApplyFilter extends HomePageEvents {}
 
 class ClearFilters extends HomePageEvents {}
+
+class ToggleToWishList extends HomePageEvents {
+  final String housingID;
+  final bool inListing;
+
+  ToggleToWishList({required this.housingID, required this.inListing});
+}

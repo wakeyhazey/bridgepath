@@ -8,7 +8,9 @@ class ResourceCenterView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Placeholder(),
+      body: const Center(
+        child: Text('Resource center coming soon'),
+      ),
       bottomNavigationBar: HomeNavigationBar(index: index),
     );
   }

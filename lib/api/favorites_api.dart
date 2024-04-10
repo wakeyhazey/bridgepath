@@ -14,7 +14,7 @@ class FavoritesApi {
     } else {
       favorites.add(nursingHomeId);
     }
-    await prefs.setStringList('wishlist', favorites);
+    await prefs.setStringList('favorites', favorites);
     return favorites;
   }
 }
