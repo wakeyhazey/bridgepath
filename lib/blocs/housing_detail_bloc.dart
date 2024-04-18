@@ -15,7 +15,7 @@ class HousingDetailBloc extends Bloc<HousingDetailEvents, HousingDetailStates> {
     on<ToggleToWishList>((event, emit) async {
       favoritesIds =
           await _housingDetailsRepository.toggleToFavorites(event.housingID);
-      print(favoritesIds);
+
       emit(HousingDetailsPageLoaded(favoritesID: favoritesIds));
     });
   }

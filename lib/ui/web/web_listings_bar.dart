@@ -1,8 +1,10 @@
+import 'package:bridgepath/blocs/home_page_bloc.dart';
 import 'package:bridgepath/ui/search_bar.dart';
-import 'package:bridgepath/ui/web/web_fillter_with_list.dart';
+import 'package:bridgepath/ui/web/web_filter_with_list.dart';
 import 'package:bridgepath/ui/web/web_filter_with_number.dart';
 import 'package:bridgepath/utils/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class WebTopBarListsingWidget extends StatelessWidget {
   final Map<String, dynamic> selectedFilters;
@@ -63,12 +65,18 @@ class WebTopBarListsingWidget extends StatelessWidget {
                                   return WebFilterWithNumberRange(
                                     filterName: entry.key,
                                     filterValue: selectedFilters[entry.key],
-                                    rating: false,
+                                    rating: true,
                                   );
                                 });
                           },
                           style: OutlinedButton.styleFrom(
                             shape: const StadiumBorder(),
+                            backgroundColor: (selectedFilters[entry.key][1]
+                                            as TextEditingController)
+                                        .text ==
+                                    '0'
+                                ? null
+                                : Colors.red.withOpacity(0.5),
                           ),
                           child: Text(entry.key),
                         ),
@@ -91,12 +99,25 @@ class WebTopBarListsingWidget extends StatelessWidget {
                           },
                           style: OutlinedButton.styleFrom(
                             shape: const StadiumBorder(),
+                            backgroundColor: selectedFilters[entry.key].isEmpty
+                                ? null
+                                : Colors.red.withOpacity(0.5),
                           ),
                           child: Text(entry.key),
                         ),
                       );
                   }
-                }).toList(),
+                }),
+                TextButton(
+                    onPressed: () {
+                      context.read<HomePageBloc>().add(ClearFilters());
+                    },
+                    child: const Text(
+                      'Clear all filter',
+                      style: TextStyle(
+                        decoration: TextDecoration.underline,
+                      ),
+                    )),
               ],
             )
           ],

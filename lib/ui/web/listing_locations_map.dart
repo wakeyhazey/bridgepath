@@ -2,18 +2,28 @@ import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
 
-class ListingsLocationsMap extends StatelessWidget {
+class ListingsLocationsMap extends StatefulWidget {
   final List<Map<String, dynamic>> listings;
-  const ListingsLocationsMap({super.key, required this.listings});
+  ListingsLocationsMap({super.key, required this.listings});
+
+  @override
+  State<ListingsLocationsMap> createState() => _ListingsLocationsMapState();
+}
+
+class _ListingsLocationsMapState extends State<ListingsLocationsMap> {
+  @override
+  void didUpdateWidget(covariant ListingsLocationsMap oldWidget) {
+    super.didUpdateWidget(oldWidget);
+  }
 
   @override
   Widget build(BuildContext context) {
     return FlutterMap(
       mapController: MapController(),
       options: MapOptions(
-        initialZoom: 12,
-        initialCenter: LatLng(
-            listings[0]['location']['lat'], listings[0]['location']['lon']),
+        initialZoom: 5,
+        initialCenter: LatLng(widget.listings[0]['location']['lat'],
+            widget.listings[0]['location']['lon']),
       ),
       children: [
         TileLayer(
@@ -21,7 +31,7 @@ class ListingsLocationsMap extends StatelessWidget {
           userAgentPackageName: 'com.example.app',
         ),
         MarkerLayer(
-          markers: listings
+          markers: widget.listings
               .map<Marker>((entry) => Marker(
                   point: LatLng(
                       entry['location']['lat'], entry['location']['lon']),

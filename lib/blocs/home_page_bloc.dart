@@ -58,6 +58,9 @@ class HomePageBloc extends Bloc<HomePageEvents, HomePageStates> {
                     housing['description']
                         .toLowerCase()
                         .contains(event.searchString) ||
+                    housing['state']
+                        .toLowerCase()
+                        .contains(event.searchString) ||
                     housing['type'].toLowerCase().contains(event.searchString))
                 .toList(),
             selectedFilters: selectedFilters));
@@ -102,8 +105,9 @@ class HomePageBloc extends Bloc<HomePageEvents, HomePageStates> {
               .contains(listing['medical_care_level']);
         }
         if (selectedFilters['accessibility features'].isNotEmpty) {
-          flag &= selectedFilters['accessibility features']
-              .contains(listing['accessibility_features']);
+          flag &= (selectedFilters['accessibility features'] as List).every(
+              (item) =>
+                  (listing['accessibility_features'] as List).contains(item));
         }
         if (selectedFilters['type'].isNotEmpty) {
           flag &= selectedFilters['type'].contains(listing['type']);
@@ -116,6 +120,13 @@ class HomePageBloc extends Bloc<HomePageEvents, HomePageStates> {
           flag &= (double.parse(selectedFilters['price'][1].text) >=
               listing['price']);
         }
+        if (double.parse(selectedFilters['rating'][0].text) !=
+            double.parse(selectedFilters['rating'][1].text)) {
+          flag &= (double.parse(selectedFilters['rating'][0].text) <=
+              listing['rating']);
+          flag &= (double.parse(selectedFilters['rating'][1].text) >=
+              listing['rating']);
+        }
         return flag;
       }).toList();
       searchTerm.clear();
@@ -123,16 +134,36 @@ class HomePageBloc extends Bloc<HomePageEvents, HomePageStates> {
     });
 
     on<ClearFilters>((event, emit) {
-      selectedFilters = {
-        'price': null,
-        "type": [],
-        "rating": -1,
-        "medical care level": [],
-        "location": null,
-        "accessibility features": []
-      };
+      if (event.filterName != null) {
+        switch (event.filterName) {
+          case 'price' || 'rating':
+            selectedFilters[event.filterName!] = [
+              TextEditingController(text: '0'),
+              TextEditingController(text: '0')
+            ];
+            break;
+          default:
+            selectedFilters[event.filterName!] = [];
+        }
+        add(ApplyFilter());
+      } else {
+        selectedFilters = {
+          'price': [
+            TextEditingController(text: '0'),
+            TextEditingController(text: '0')
+          ],
+          "type": [],
+          "rating": [
+            TextEditingController(text: '0'),
+            TextEditingController(text: '0')
+          ],
+          "medical care level": [],
+          "location": null,
+          "accessibility features": []
+        };
 
-      filteredNursingHomes = listings;
+        filteredNursingHomes = listings;
+      }
 
       add(ShowListingsView());
     });
@@ -207,7 +238,11 @@ class UpdateFilter extends HomePageEvents {
 
 class ApplyFilter extends HomePageEvents {}
 
-class ClearFilters extends HomePageEvents {}
+class ClearFilters extends HomePageEvents {
+  final String? filterName;
+
+  ClearFilters({this.filterName});
+}
 
 class ToggleToWishList extends HomePageEvents {
   final String housingID;

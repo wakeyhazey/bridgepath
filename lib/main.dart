@@ -1,6 +1,7 @@
 import 'package:bridgepath/blocs/access_bloc.dart';
 import 'package:bridgepath/blocs/home_page_bloc.dart';
-import 'package:bridgepath/pages/access_page.dart';
+// import 'package:bridgepath/pages/access_page.dart';
+import 'package:bridgepath/pages/home_pages.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -48,10 +49,14 @@ class BridgePathApp extends StatelessWidget {
       child: MaterialApp(
         title: 'BridgePath',
         theme: ThemeData(
-            primarySwatch: Colors.green,
-            appBarTheme: AppBarTheme(
+            primarySwatch: Colors.red,
+            colorScheme: ColorScheme.fromSeed(
+              seedColor: Colors.red,
+            ),
+            scaffoldBackgroundColor: Colors.white,
+            appBarTheme: const AppBarTheme(
                 backgroundColor: Colors.white, foregroundColor: Colors.black)),
-        home: const AccessPage(),
+        home: const HomePage(),
       ),
     );
   }

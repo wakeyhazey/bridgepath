@@ -60,12 +60,22 @@ class _WebFilterWithListOptionsWidgetState
       ),
       actions: [
         TextButton(
-            onPressed: () {},
+            onPressed: () {
+              context
+                  .read<HomePageBloc>()
+                  .add(ClearFilters(filterName: widget.filterName));
+              Navigator.pop(context);
+            },
             child: const Text(
               'clear',
               style: TextStyle(color: Colors.red),
             )),
-        TextButton(onPressed: () {}, child: const Text('update'))
+        TextButton(
+            onPressed: () {
+              context.read<HomePageBloc>().add(ApplyFilter());
+              Navigator.pop(context);
+            },
+            child: const Text('update'))
       ],
     );
   }

@@ -1,5 +1,7 @@
+import 'package:bridgepath/blocs/home_page_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class WebFilterWithNumberRange extends StatefulWidget {
   final String filterName;
@@ -77,12 +79,25 @@ class _WebFilterWithNumberRangeState extends State<WebFilterWithNumberRange> {
       ),
       actions: [
         TextButton(
-            onPressed: () {},
+            onPressed: () {
+              context
+                  .read<HomePageBloc>()
+                  .add(ClearFilters(filterName: widget.filterName));
+              Navigator.pop(context);
+            },
             child: const Text(
               'clear',
               style: TextStyle(color: Colors.red),
             )),
-        TextButton(onPressed: () {}, child: const Text('update'))
+        TextButton(
+            onPressed: () {
+              if (double.parse(widget.filterValue[0].text) <=
+                  double.parse(widget.filterValue[1].text)) {
+                context.read<HomePageBloc>().add(ApplyFilter());
+                Navigator.pop(context);
+              }
+            },
+            child: const Text('update'))
       ],
     );
   }

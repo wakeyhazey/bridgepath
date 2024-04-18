@@ -1,13 +1,14 @@
 List<Map<String, dynamic>> dummyNursingHomes = [
   {
     "name": "Sunrise Nursing Home",
+    "state": "California",
     'id': '1',
     "price": 3500,
     "type": "Assisted Living",
     "description":
         "Sunrise Nursing Home offers comfortable assisted living accommodations with personalized care services.",
     "medical_care_level": "Intermediate",
-    "location": {"lat": 37.7749, "lon": -122.4194},
+    "location": {"lat": 34.0522, "lon": -118.2437},
     "address": "123 Main St, Anytown, USA",
     "accessibility_features": ["Wheelchair Accessible", "Elevator"],
     "rating": 4.5,
@@ -16,6 +17,7 @@ List<Map<String, dynamic>> dummyNursingHomes = [
   },
   {
     "name": "Maplewood Nursing Residence",
+    "state": "New York",
     'id': '2',
     "price": 4200,
     "type": "Skilled Nursing Facility",
@@ -31,13 +33,14 @@ List<Map<String, dynamic>> dummyNursingHomes = [
   },
   {
     "name": "Pinecrest Senior Living",
+    "state": "California",
     'id': '3',
     "price": 3000,
     "type": "Independent Living",
     "description":
         "Pinecrest Senior Living offers independent living accommodations in a serene environment with various amenities.",
     "medical_care_level": "Basic",
-    "location": {"lat": 34.0522, "lon": -118.2437},
+    "location": {"lat": 35.0522, "lon": -118.2437},
     "address": "789 Oak St, Anyville, USA",
     "accessibility_features": ["Accessible Parking", "Wide Doorways"],
     "rating": 4.2,
@@ -46,6 +49,7 @@ List<Map<String, dynamic>> dummyNursingHomes = [
   },
   {
     "name": "Golden Acres Retirement Community",
+    "state": "Illinois",
     'id': '4',
     "price": 3800,
     "type": "Retirement Community",
@@ -53,21 +57,22 @@ List<Map<String, dynamic>> dummyNursingHomes = [
         "Golden Acres Retirement Community provides a vibrant community for seniors with a range of social activities and amenities.",
     "medical_care_level": "Basic",
     "location": {"lat": 41.8781, "lon": -87.6298},
-    "address": "101 Pine St, Anyborough, USA",
+    "address": "567 Pine St, Sunnyville, USA",
     "accessibility_features": ["Accessible Gardens", "Fitness Center"],
     "rating": 4.6,
     "image": "https://s7d2.scene7.com/is/image/TWCNews/nursing_home_jpg-1-1"
   },
   {
     "name": "Harborview Assisted Living",
+    "state": "California",
     'id': '5',
     "price": 3200,
     "type": "Assisted Living",
     "description":
         "Harborview Assisted Living offers personalized care and support in a waterfront setting, promoting independence and well-being.",
     "medical_care_level": "Intermediate",
-    "location": {"lat": 47.6062, "lon": -122.3321},
-    "address": "555 Harbor Dr, Anycove, USA",
+    "location": {"lat": 34.0522, "lon": -119.2437},
+    "address": "234 Maple Ave, Sunnyville, USA",
     "accessibility_features": [
       "Accessible Bathrooms",
       "Emergency Call Systems"
@@ -78,14 +83,15 @@ List<Map<String, dynamic>> dummyNursingHomes = [
   },
   {
     "name": "Oakridge Senior Apartments",
+    "state": "Maryland",
     'id': '6',
     "price": 2800,
     "type": "Senior Apartments",
     "description":
         "Oakridge Senior Apartments provide affordable independent living options for active seniors, featuring spacious layouts and community events.",
     "medical_care_level": "Basic",
-    "location": {"lat": 33.6846, "lon": -117.8265},
-    "address": "321 Maple Ave, Anytown, USA",
+    "location": {"lat": 39.2904, "lon": -76.6122},
+    "address": "789 Oak St, Pineville, USA",
     "accessibility_features": ["Accessible Common Areas", "Lift Chairs"],
     "rating": 4.0,
     "image":

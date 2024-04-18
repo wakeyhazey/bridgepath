@@ -27,29 +27,34 @@ class WebListingsViewWidget extends StatelessWidget {
         SizedBox(
             height: 100,
             child: WebTopBarListsingWidget(selectedFilters: selectedFilters)),
-        Expanded(
-            flex: 8,
-            child: Row(
-              children: [
-                Expanded(
-                  flex: 2,
-                  child: ListingsLocationsMap(listings: listings),
-                ),
-                Expanded(
-                  child: ListView(
-                    children: listings
-                        .map(
-                          (nusringHome) => HousingDetailCard(
-                            inListing: true,
-                            housingDetail: nusringHome,
-                            favoritesID: favoriteHousings,
-                          ),
-                        )
-                        .toList(),
+        if (listings.isEmpty)
+          const Center(
+            child: Text('No housings with these filters'),
+          )
+        else
+          Expanded(
+              flex: 8,
+              child: Row(
+                children: [
+                  Expanded(
+                    flex: 2,
+                    child: ListingsLocationsMap(listings: listings),
                   ),
-                )
-              ],
-            ))
+                  Expanded(
+                    child: ListView(
+                      children: listings
+                          .map(
+                            (nusringHome) => HousingDetailCard(
+                              inListing: true,
+                              housingDetail: nusringHome,
+                              favoritesID: favoriteHousings,
+                            ),
+                          )
+                          .toList(),
+                    ),
+                  )
+                ],
+              ))
       ]),
       bottomNavigationBar: HomeNavigationBar(
         index: index,
